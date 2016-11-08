@@ -8,6 +8,15 @@ var app = express();
 
 var port = process.env.PORT || 3000;
 
+app.use(function(req, res, next){
+  if(req.headers['x-forwarded-proto'] === 'https'){
+    res.redirect('http://' + req.hostname + req.url);
+  }
+  else{
+    next();
+  }
+});
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
