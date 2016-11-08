@@ -1,0 +1,36 @@
+<h2>Current Weather and Forecast</h2>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" ng-model="city" class="form-control" placeholder="Enter a city name, e.g, Bangalore">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" ng-click="search()">Get Weather</button>
+      </span>
+    </div>
+    <!-- /input-group -->
+  </div>
+  <!-- /.col-lg-6 -->
+</div>
+
+<br />
+
+<uib-tabset active="active">
+  <!-- <uib-tab index="0" heading="Static title">Static content</uib-tab> -->
+  <uib-tab index="$index + 1" ng-repeat="item in days" heading="{{item}}" disable="tab.disabled">
+    <br />
+    <div class="row">
+      <div class="col-md-4" ng-repeat="day in data | filter: item">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{day.date}}</h3>
+          </div>
+          <div class="panel-body">
+            {{"Min. Temp. (in Celcius): " + day.min_temp}}
+            <br /> {{"Max. Temp. (in Celcius): " + day.max_temp}}
+            <br /> {{"Humidity: " + day.humidity}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </uib-tab>
+</uib-tabset>
